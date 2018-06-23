@@ -1,4 +1,4 @@
-package geekgram.supernacho.ru.utils;
+package me.geeksploit.markmyword.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,7 +6,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.provider.Settings;
 
-import geekgram.supernacho.ru.App;
+import me.geeksploit.markmyword.App;
 
 public class NetworkStatus
 {
