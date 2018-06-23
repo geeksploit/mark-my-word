@@ -1,4 +1,7 @@
 package me.geeksploit.markmyword.model.image;
 
-public class GlideModule {
+import com.bumptech.glide.module.AppGlideModule;
+
+@com.bumptech.glide.annotation.GlideModule
+public class GlideModule extends AppGlideModule{
 }

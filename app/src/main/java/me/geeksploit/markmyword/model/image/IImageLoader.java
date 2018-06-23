@@ -1,4 +1,4 @@
-package geekgram.supernacho.ru.model.image;
+package me.geeksploit.markmyword.model.image;
 
 import android.support.annotation.Nullable;
 
