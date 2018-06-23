@@ -1,4 +1,4 @@
-package ru.supernacho.markmywordtemp.view.adapters;
+package me.geeksploit.markmyword.view.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -15,9 +15,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.supernacho.markmywordtemp.R;
-import ru.supernacho.markmywordtemp.model.WordModel;
-import ru.supernacho.markmywordtemp.presenter.MainPresenter;
+import me.geeksploit.markmyword.R;
+import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.presenter.MainPresenter;
 
 public class WordListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

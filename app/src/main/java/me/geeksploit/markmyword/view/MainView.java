@@ -1,4 +1,4 @@
-package ru.supernacho.markmywordtemp.view;
+package me.geeksploit.markmyword.view;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;

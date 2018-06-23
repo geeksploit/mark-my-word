@@ -1,6 +1,4 @@
-package ru.supernacho.markmywordtemp.model;
-
-import java.net.URI;
+package me.geeksploit.markmyword.model;
 
 public class WordModel {
     private String word;

@@ -1,4 +1,4 @@
-package ru.supernacho.markmywordtemp.view.adapters;
+package me.geeksploit.markmyword.view.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -15,9 +15,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.supernacho.markmywordtemp.R;
-import ru.supernacho.markmywordtemp.model.WordModel;
-import ru.supernacho.markmywordtemp.presenter.MainPresenter;
+import me.geeksploit.markmyword.R;
+import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.presenter.MainPresenter;
 
 public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -63,10 +63,14 @@ public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     class CardItemView extends RecyclerView.ViewHolder{
 
         @BindView(R.id.cl_card_item) ConstraintLayout itemLayout;
-        @BindView(R.id.iv_image_word_card_item) ImageView ivItemImage;
-        @BindView(R.id.tv_word_card_view) TextView tvWord;
-        @BindView(R.id.tv_main_translate_card_view) TextView tvWordTranslate;
-        @BindView(R.id.tv_word_description_card_view) TextView tvWordDescription;
+        @BindView(R.id.iv_image_word_card_item)
+        ImageView ivItemImage;
+        @BindView(R.id.tv_word_card_view)
+        TextView tvWord;
+        @BindView(R.id.tv_main_translate_card_view)
+        TextView tvWordTranslate;
+        @BindView(R.id.tv_word_description_card_view)
+        TextView tvWordDescription;
 
         public CardItemView(View itemView) {
             super(itemView);
