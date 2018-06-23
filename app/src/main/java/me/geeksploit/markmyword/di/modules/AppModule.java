@@ -1,8 +1,8 @@
-package geekgram.supernacho.ru.di.modules;
+package me.geeksploit.markmyword.di.modules;
 
 import dagger.Module;
 import dagger.Provides;
-import geekgram.supernacho.ru.App;
+import me.geeksploit.markmyword.App;
 
 @Module
 public class AppModule {
