@@ -62,14 +62,10 @@ public class WordListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     class ListItemView extends RecyclerView.ViewHolder{
-        @BindView(R.id.ll_item_layout)
-        LinearLayout itemLayout;
-        @BindView(R.id.iv_word_image_list_item)
-        ImageView ivItemImage;
-        @BindView(R.id.tv_word_list_item)
-        TextView tvWord;
-        @BindView(R.id.tv_word_desc_list_item)
-        TextView tvWordTranslate;
+        @BindView(R.id.ll_item_layout) LinearLayout itemLayout;
+        @BindView(R.id.iv_word_image_list_item) ImageView ivItemImage;
+        @BindView(R.id.tv_word_list_item) TextView tvWord;
+        @BindView(R.id.tv_word_desc_list_item) TextView tvWordTranslate;
 
         public ListItemView(View itemView) {
             super(itemView);

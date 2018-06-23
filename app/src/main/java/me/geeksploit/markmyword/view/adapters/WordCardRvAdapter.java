@@ -66,14 +66,10 @@ public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     class CardItemView extends RecyclerView.ViewHolder{
 
         @BindView(R.id.cl_card_item) ConstraintLayout itemLayout;
-        @BindView(R.id.iv_image_word_card_item)
-        ImageView ivItemImage;
-        @BindView(R.id.tv_word_card_view)
-        TextView tvWord;
-        @BindView(R.id.tv_main_translate_card_view)
-        TextView tvWordTranslate;
-        @BindView(R.id.tv_word_description_card_view)
-        TextView tvWordDescription;
+        @BindView(R.id.iv_image_word_card_item) ImageView ivItemImage;
+        @BindView(R.id.tv_word_card_view) TextView tvWord;
+        @BindView(R.id.tv_main_translate_card_view) TextView tvWordTranslate;
+        @BindView(R.id.tv_word_description_card_view) TextView tvWordDescription;
 
         public CardItemView(View itemView) {
             super(itemView);
