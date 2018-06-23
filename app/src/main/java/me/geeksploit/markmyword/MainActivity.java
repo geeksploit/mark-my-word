@@ -78,6 +78,7 @@ public class MainActivity extends MvpAppCompatActivity
     private void initCards() {
         LinearLayoutManager cardLayoutManager = new LinearLayoutManager(this);
         cardAdapter = new WordCardRvAdapter(presenter);
+        App.getInstance().getAppComponent().inject(cardAdapter);
         cardLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvWordCards.setLayoutManager(cardLayoutManager);
         rvWordCards.setAdapter(cardAdapter);
@@ -86,6 +87,7 @@ public class MainActivity extends MvpAppCompatActivity
     private void initList() {
         LinearLayoutManager listLayoutManager = new LinearLayoutManager(this);
         listAdapter = new WordListRvAdapter(presenter);
+        App.getInstance().getAppComponent().inject(listAdapter);
         listLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvWordLists.setLayoutManager(listLayoutManager);
         rvWordLists.setAdapter(listAdapter);
