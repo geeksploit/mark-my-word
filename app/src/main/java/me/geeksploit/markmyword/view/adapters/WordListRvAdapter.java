@@ -13,10 +13,13 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.geeksploit.markmyword.R;
 import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 
 public class WordListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -24,12 +27,12 @@ public class WordListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private List<WordModel> words;
     private MainPresenter presenter;
 
+    @Inject
+    IImageLoader<ImageView> imageLoader;
+
     public WordListRvAdapter(MainPresenter presenter) {
         this.presenter = presenter;
-        words = new ArrayList<>();
-        words.add(new WordModel("User", "Пользователь"));
-        words.add(new WordModel("Computer", "Компьютер"));
-        words.add(new WordModel("Synchronization", "Синхронизация"));
+        words = presenter.getWords();
     }
 
     @NonNull
@@ -45,6 +48,7 @@ public class WordListRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         WordModel word = words.get(position);
         listItem.tvWord.setText(word.getWord());
         listItem.tvWordTranslate.setText(word.getTranslate());
+        imageLoader.loadInto(word.getImgUri(), listItem.ivItemImage);
         if (presenter.isImageOn()) {
             listItem.ivItemImage.setVisibility(View.VISIBLE);
         } else {

@@ -13,25 +13,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.geeksploit.markmyword.R;
 import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 
 public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<WordModel> words;
     private MainPresenter presenter;
+    @Inject
+    IImageLoader<ImageView> imageLoader;
 
     public WordCardRvAdapter(MainPresenter presenter) {
         this.presenter = presenter;
 
         //test collection
-        words = new ArrayList<>();
-        words.add(new WordModel("User", "Пользователь"));
-        words.add(new WordModel("Computer", "Компьютер"));
-        words.add(new WordModel("Synchronization", "Синхронизация"));
+        words = presenter.getWords();
     }
 
     @NonNull
@@ -48,6 +50,7 @@ public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         cardItem.tvWord.setText(word.getWord());
         cardItem.tvWordTranslate.setText(word.getTranslate());
         cardItem.tvWordDescription.setText(word.getDescription());
+        imageLoader.loadInto(word.getImgUri(), cardItem.ivItemImage);
         if (presenter.isImageOn()) {
             cardItem.ivItemImage.setVisibility(View.VISIBLE);
         } else {
@@ -78,6 +81,7 @@ public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // TODO: 23.06.2018 presenter calls must be here
                     Snackbar.make(v, "Pressed: " + tvWord.getText(), Snackbar.LENGTH_SHORT).show();
                 }
             });
