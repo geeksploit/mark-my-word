@@ -41,7 +41,7 @@ import me.geeksploit.markmyword.view.listeners.SwipeRefreshListener;
 import me.geeksploit.markmyword.view.listeners.SwitchListener;
 
 public class MainActivity extends MvpAppCompatActivity
-        implements /*NavigationView.OnNavigationItemSelectedListener,*/ MainView {
+        implements MainView {
 
     private Boolean isList = true;
     private ListRvAdapter listAdapter;
@@ -147,6 +147,12 @@ public class MainActivity extends MvpAppCompatActivity
         } else {
             cardAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void switchToCard(int cardPos) {
+        switchWordViewType.setChecked(true);
+        rvWordCards.smoothScrollToPosition(cardPos);
     }
 
     @Override

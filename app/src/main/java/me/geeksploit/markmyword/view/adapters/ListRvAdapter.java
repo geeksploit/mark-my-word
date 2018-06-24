@@ -58,6 +58,7 @@ public class ListRvAdapter extends WordRvAdapter {
             itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    presenter.switchToCard(getLayoutPosition());
                     Snackbar.make(v, "Pressed: " + tvWord.getText(), Snackbar.LENGTH_SHORT).show();
                 }
             });

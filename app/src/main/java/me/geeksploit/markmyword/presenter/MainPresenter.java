@@ -36,6 +36,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
+    public void switchToCard(int wordPos){
+        getViewState().switchToCard(wordPos);
+    }
+
     public boolean isImageOn() {
         return isImageOn;
     }
