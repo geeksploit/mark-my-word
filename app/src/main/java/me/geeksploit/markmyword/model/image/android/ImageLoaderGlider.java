@@ -10,11 +10,6 @@ import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.utils.NetworkStatus;
 
 public class ImageLoaderGlider implements IImageLoader<ImageView> {
-    private Icache cache;
-
-    public ImageLoaderGlider(Icache cache) {
-        this.cache = cache;
-    }
 
     @Override
     public void loadInto(@Nullable String url, ImageView container) {
@@ -22,22 +17,5 @@ public class ImageLoaderGlider implements IImageLoader<ImageView> {
                 .load(url)
                 .placeholder(R.drawable.ic_image_grey_48dp)
                 .into(container);
-    }
-
-    @Override
-    public void loadIntoFromNet(@Nullable String url, ImageView container) {
-        if (NetworkStatus.isOnline()) {
-            GlideApp.with(container.getContext())
-                    .load(url)
-                    .placeholder(R.drawable.ic_image_grey_48dp)
-                    .into(container);
-        } else {
-            if (cache.contains(url)){
-                GlideApp.with(container.getContext())
-                        .load(R.drawable.ic_image_grey_48dp)
-                        .placeholder(R.drawable.ic_image_grey_48dp)
-                        .into(container);
-            }
-        }
     }
 }

@@ -11,10 +11,10 @@ import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.model.image.android.ImageLoaderGlider;
 
 @Singleton
-@Module (includes = IcacheModule.class)
+@Module
 public class ImageGlideModule {
     @Provides
-    IImageLoader<ImageView> imageLoader(Icache cache){
-        return new ImageLoaderGlider(cache);
+    IImageLoader<ImageView> imageLoader(){
+        return new ImageLoaderGlider();
     }
 }
