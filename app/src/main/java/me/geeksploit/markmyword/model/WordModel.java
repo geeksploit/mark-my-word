@@ -13,8 +13,7 @@ public class WordModel {
     }
 
     public WordModel(String word, String translate, String description, String imgUri) {
-        this.word = word;
-        this.translate = translate;
+        this(word, translate);
         this.description = description;
         this.imgUri = imgUri;
 }
