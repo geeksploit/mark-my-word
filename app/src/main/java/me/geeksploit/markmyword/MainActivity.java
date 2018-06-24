@@ -25,14 +25,16 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 import me.geeksploit.markmyword.view.MainView;
-import me.geeksploit.markmyword.view.adapters.WordCardRvAdapter;
-import me.geeksploit.markmyword.view.adapters.WordListRvAdapter;
+import me.geeksploit.markmyword.view.adapters.CardRvAdapter;
+import me.geeksploit.markmyword.view.adapters.ListRvAdapter;
 
 public class MainActivity extends MvpAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -40,8 +42,8 @@ public class MainActivity extends MvpAppCompatActivity
         SwitchCompat.OnCheckedChangeListener, MainView {
 
     private Boolean isList = true;
-    private WordListRvAdapter listAdapter;
-    private WordCardRvAdapter cardAdapter;
+    private ListRvAdapter listAdapter;
+    private CardRvAdapter cardAdapter;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.fab) FloatingActionButton fab;
@@ -57,12 +59,16 @@ public class MainActivity extends MvpAppCompatActivity
     @InjectPresenter
     MainPresenter presenter;
 
+    @Inject
+    App app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        App.getInstance().getAppComponent().inject(this);
         initUi();
         initList();
         initCards();
@@ -77,7 +83,7 @@ public class MainActivity extends MvpAppCompatActivity
 
     private void initCards() {
         LinearLayoutManager cardLayoutManager = new LinearLayoutManager(this);
-        cardAdapter = new WordCardRvAdapter(presenter);
+        cardAdapter = new CardRvAdapter(presenter);
         App.getInstance().getAppComponent().inject(cardAdapter);
         cardLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvWordCards.setLayoutManager(cardLayoutManager);
@@ -86,7 +92,7 @@ public class MainActivity extends MvpAppCompatActivity
 
     private void initList() {
         LinearLayoutManager listLayoutManager = new LinearLayoutManager(this);
-        listAdapter = new WordListRvAdapter(presenter);
+        listAdapter = new ListRvAdapter(presenter);
         App.getInstance().getAppComponent().inject(listAdapter);
         listLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvWordLists.setLayoutManager(listLayoutManager);

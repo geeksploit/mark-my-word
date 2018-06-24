@@ -10,30 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.geeksploit.markmyword.R;
 import me.geeksploit.markmyword.model.WordModel;
-import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 
-public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CardRvAdapter extends WordRvAdapter {
 
-    private List<WordModel> words;
-    private MainPresenter presenter;
-    @Inject
-    IImageLoader<ImageView> imageLoader;
-
-    public WordCardRvAdapter(MainPresenter presenter) {
-        this.presenter = presenter;
-
-        //test collection
-        words = presenter.getWords();
+    public CardRvAdapter(MainPresenter presenter) {
+        super(presenter);
     }
 
     @NonNull
@@ -50,24 +36,22 @@ public class WordCardRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         cardItem.tvWord.setText(word.getWord());
         cardItem.tvWordTranslate.setText(word.getTranslate());
         cardItem.tvWordDescription.setText(word.getDescription());
-        imageLoader.loadInto(word.getImgUri(), cardItem.ivItemImage);
         if (presenter.isImageOn()) {
+            imageLoader.loadInto(word.getImgUri(), cardItem.ivItemImage);
             cardItem.ivItemImage.setVisibility(View.VISIBLE);
         } else {
             cardItem.ivItemImage.setVisibility(View.GONE);
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return words.size();
-    }
-
     class CardItemView extends RecyclerView.ViewHolder{
 
-        @BindView(R.id.cl_card_item) ConstraintLayout itemLayout;
-        @BindView(R.id.iv_image_word_card_item) ImageView ivItemImage;
-        @BindView(R.id.tv_word_card_view) TextView tvWord;
+        @BindView(R.id.cl_card_item)
+        ConstraintLayout itemLayout;
+        @BindView(R.id.iv_image_word_card_item)
+        ImageView ivItemImage;
+        @BindView(R.id.tv_word_card_view)
+        TextView tvWord;
         @BindView(R.id.tv_main_translate_card_view) TextView tvWordTranslate;
         @BindView(R.id.tv_word_description_card_view) TextView tvWordDescription;
 
