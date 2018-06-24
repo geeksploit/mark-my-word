@@ -114,7 +114,7 @@ public class MainActivity extends MvpAppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(new NavigationDrawerListener(drawer));
+        navigationView.setNavigationItemSelectedListener(new NavigationDrawerListener(drawer, presenter));
     }
 
     @OnClick({R.id.cb_image_switcher, R.id.fab})
