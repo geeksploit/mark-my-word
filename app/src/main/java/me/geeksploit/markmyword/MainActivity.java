@@ -35,11 +35,12 @@ import me.geeksploit.markmyword.presenter.MainPresenter;
 import me.geeksploit.markmyword.view.MainView;
 import me.geeksploit.markmyword.view.adapters.CardRvAdapter;
 import me.geeksploit.markmyword.view.adapters.ListRvAdapter;
+import me.geeksploit.markmyword.view.listeners.NavigationDrawerListener;
+import me.geeksploit.markmyword.view.listeners.SwipeRefreshListener;
+import me.geeksploit.markmyword.view.listeners.SwitchListener;
 
 public class MainActivity extends MvpAppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        SwipeRefreshLayout.OnRefreshListener,
-        SwitchCompat.OnCheckedChangeListener, MainView {
+        implements /*NavigationView.OnNavigationItemSelectedListener,*/ MainView {
 
     private Boolean isList = true;
     private ListRvAdapter listAdapter;
@@ -69,6 +70,7 @@ public class MainActivity extends MvpAppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         App.getInstance().getAppComponent().inject(this);
+        initNavDrawer();
         initUi();
         initList();
         initCards();
@@ -100,31 +102,31 @@ public class MainActivity extends MvpAppCompatActivity
     }
 
     private void initUi() {
+        SwipeRefreshListener swipeRefreshListener = new SwipeRefreshListener(presenter, swipeRefreshCard, swipeRefreshList);
+        SwitchListener switchListener = new SwitchListener(this, swipeRefreshCard, swipeRefreshList);
+        swipeRefreshCard.setOnRefreshListener(swipeRefreshListener);
+        swipeRefreshList.setOnRefreshListener(swipeRefreshListener);
+        switchWordViewType.setOnCheckedChangeListener(switchListener);
+    }
+
+    private void initNavDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-        swipeRefreshCard.setOnRefreshListener(this);
-        swipeRefreshList.setOnRefreshListener(this);
-        switchWordViewType.setOnCheckedChangeListener(this);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        navigationView.setNavigationItemSelectedListener(new NavigationDrawerListener(drawer));
     }
 
-    @OnClick({R.id.cb_image_switcher})
+    @OnClick({R.id.cb_image_switcher, R.id.fab})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.cb_image_switcher:
                 presenter.switchImageVisibility(checkBoxWordImageView.isChecked());
                 updateAdapters();
+                break;
+            case R.id.fab:
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
                 break;
             default:
                 Toast.makeText(this, "No such button", Toast.LENGTH_SHORT).show();
@@ -152,10 +154,8 @@ public class MainActivity extends MvpAppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         createSearchMenu(menu);
-
         return true;
     }
 
@@ -184,12 +184,8 @@ public class MainActivity extends MvpAppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -197,59 +193,7 @@ public class MainActivity extends MvpAppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onRefresh() {
-        if (swipeRefreshCard.getVisibility() == View.VISIBLE) {
-            Toast.makeText(this, "Cards refreshed", Toast.LENGTH_SHORT).show();
-            swipeRefreshCard.setRefreshing(false);
-        }
-        if (swipeRefreshList.getVisibility() == View.VISIBLE) {
-
-            Toast.makeText(this, "List refreshed", Toast.LENGTH_SHORT).show();
-            swipeRefreshList.setRefreshing(false);
-        }
-    }
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (buttonView.getId() == R.id.sw_view_type) {
-            if (isChecked && swipeRefreshCard.getVisibility() == View.GONE) {
-                swipeRefreshList.setVisibility(View.GONE);
-                swipeRefreshCard.setVisibility(View.VISIBLE);
-                isList = false;
-                updateAdapters();
-            }
-
-            if (!isChecked && swipeRefreshList.getVisibility() == View.GONE) {
-                swipeRefreshList.setVisibility(View.VISIBLE);
-                swipeRefreshCard.setVisibility(View.GONE);
-                isList = true;
-                updateAdapters();
-            }
-        }
+    public void setListViewing(Boolean isViewing) {
+        isList = isViewing;
     }
 }
