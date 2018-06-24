@@ -6,8 +6,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -45,6 +46,7 @@ public class MainActivity extends MvpAppCompatActivity
     private Boolean isList = true;
     private ListRvAdapter listAdapter;
     private CardRvAdapter cardAdapter;
+    private SnapHelper snapHelper;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.fab) FloatingActionButton fab;
@@ -89,7 +91,9 @@ public class MainActivity extends MvpAppCompatActivity
         App.getInstance().getAppComponent().inject(cardAdapter);
         cardLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvWordCards.setLayoutManager(cardLayoutManager);
+        rvWordCards.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
         rvWordCards.setAdapter(cardAdapter);
+        snapHelper.attachToRecyclerView(rvWordCards);
     }
 
     private void initList() {
@@ -99,9 +103,11 @@ public class MainActivity extends MvpAppCompatActivity
         listLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvWordLists.setLayoutManager(listLayoutManager);
         rvWordLists.setAdapter(listAdapter);
+        snapHelper.attachToRecyclerView(rvWordLists);
     }
 
     private void initUi() {
+        snapHelper = new PagerSnapHelper();
         SwipeRefreshListener swipeRefreshListener = new SwipeRefreshListener(presenter, swipeRefreshCard, swipeRefreshList);
         SwitchListener switchListener = new SwitchListener(this, swipeRefreshCard, swipeRefreshList);
         swipeRefreshCard.setOnRefreshListener(swipeRefreshListener);
