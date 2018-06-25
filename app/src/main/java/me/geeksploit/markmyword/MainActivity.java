@@ -205,6 +205,14 @@ public class MainActivity extends MvpAppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            if (isList) swipeRefreshCard.setVisibility(View.GONE);
+        }
+    }
+
     public void setListViewing(Boolean isViewing) {
         isList = isViewing;
     }
