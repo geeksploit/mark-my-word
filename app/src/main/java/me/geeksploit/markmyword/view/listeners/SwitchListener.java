@@ -25,19 +25,20 @@ public class SwitchListener implements CompoundButton.OnCheckedChangeListener {
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        MainActivity activity = (MainActivity)context;
         if (buttonView.getId() == R.id.sw_view_type) {
             if (isChecked && cards.getVisibility() == View.GONE) {
                 list.setVisibility(View.GONE);
                 cards.setVisibility(View.VISIBLE);
-                ((MainActivity)context).setListViewing(false);
-                ((MainActivity)context).updateAdapters();
+                activity.setListViewing(false);
+                activity.updateAdapters();
             }
 
             if (!isChecked && list.getVisibility() == View.GONE) {
                 list.setVisibility(View.VISIBLE);
                 cards.setVisibility(View.GONE);
-                ((MainActivity)context).setListViewing(true);
-                ((MainActivity)context).updateAdapters();
+                activity.setListViewing(true);
+                activity.updateAdapters();
             }
         }
     }

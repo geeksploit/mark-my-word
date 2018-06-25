@@ -32,7 +32,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import me.geeksploit.markmyword.model.entity.prefs.MainPrefsEntity;
 import me.geeksploit.markmyword.presenter.MainPresenter;
+import me.geeksploit.markmyword.utils.IPrefsController;
+import me.geeksploit.markmyword.utils.PrefsFactory;
 import me.geeksploit.markmyword.view.MainView;
 import me.geeksploit.markmyword.view.adapters.CardRvAdapter;
 import me.geeksploit.markmyword.view.adapters.ListRvAdapter;
@@ -43,7 +46,8 @@ import me.geeksploit.markmyword.view.listeners.SwitchListener;
 public class MainActivity extends MvpAppCompatActivity
         implements MainView {
 
-    private Boolean isList = true;
+    private IPrefsController prefsController;
+    private MainPrefsEntity mainPrefs;
     private ListRvAdapter listAdapter;
     private CardRvAdapter cardAdapter;
     private SnapHelper snapHelper;
@@ -72,10 +76,22 @@ public class MainActivity extends MvpAppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         App.getInstance().getAppComponent().inject(this);
+        mainPrefs = new MainPrefsEntity(true, false);
+        prefsController = PrefsFactory.getPrefs(this);
         initNavDrawer();
         initUi();
         initList();
         initCards();
+        loadPreferences();
+    }
+
+    private void loadPreferences() {
+        mainPrefs = (MainPrefsEntity) prefsController.restoreUI();
+        if (!mainPrefs.isList()) switchWordViewType.setChecked(!mainPrefs.isList());
+        if (mainPrefs.isImageDisplayed()) {
+            checkBoxWordImageView.setChecked(mainPrefs.isImageDisplayed());
+            switchImageDisplayed();
+        }
     }
 
     @ProvidePresenter
@@ -127,8 +143,7 @@ public class MainActivity extends MvpAppCompatActivity
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.cb_image_switcher:
-                presenter.switchImageVisibility(checkBoxWordImageView.isChecked());
-                updateAdapters();
+                switchImageDisplayed();
                 break;
             case R.id.fab:
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -140,9 +155,16 @@ public class MainActivity extends MvpAppCompatActivity
         }
     }
 
+    private void switchImageDisplayed() {
+        boolean isChecked = checkBoxWordImageView.isChecked();
+        mainPrefs.setImageDisplayed(isChecked);
+        presenter.switchImageVisibility(isChecked);
+        updateAdapters();
+    }
+
     @Override
     public void updateAdapters(){
-        if (isList) {
+        if (mainPrefs.isList()) {
             listAdapter.notifyDataSetChanged();
         } else {
             cardAdapter.notifyDataSetChanged();
@@ -206,14 +228,24 @@ public class MainActivity extends MvpAppCompatActivity
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        prefsController.saveUIState(mainPrefs);
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus){
-            if (isList) swipeRefreshCard.setVisibility(View.GONE);
+            if (mainPrefs.isList()) {
+                swipeRefreshCard.setVisibility(View.GONE);
+            } else {
+                swipeRefreshList.setVisibility(View.GONE);
+            }
         }
     }
 
     public void setListViewing(Boolean isViewing) {
-        isList = isViewing;
+        mainPrefs.setList(isViewing);
     }
 }
