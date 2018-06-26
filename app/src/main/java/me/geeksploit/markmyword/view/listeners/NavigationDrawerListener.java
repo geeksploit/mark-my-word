@@ -23,13 +23,13 @@ public class NavigationDrawerListener implements NavigationView.OnNavigationItem
         int id = item.getItemId();
         // TODO: 24.06.2018 presenter interaction for menu items
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_open_book) {
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_parse_book) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_statistics) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_share) {
 
