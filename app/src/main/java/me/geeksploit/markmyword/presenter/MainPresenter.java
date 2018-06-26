@@ -27,7 +27,14 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 "Всякое разное описание",
                 "https://im0-tub-ru.yandex.net/i?id=0c06c92ffc61bdee7a4cca1ec9d8c4f0&n=13"));
         wordsList.add(new WordModel("Synchronization", "Синхронизация",
-                "Всякое разное описание",
+                "[sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (sync, synchronism)\n\n full synchronization – полная синхронизация" +
+                        "выполнение синхронизации\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прич\n синхронизированный\n (sync)" +
+                        "синхронизирующий\n (synchronizing)\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прил\n  синхронизационный\n\n" +
+                        "synchronisation [sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (synchronization, synchronism)" +
+                        "[sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (sync, synchronism)\n\n full synchronization – полная синхронизация" +
+                        "выполнение синхронизации\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прич\n синхронизированный\n (sync)" +
+                        "синхронизирующий\n (synchronizing)\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прил\n  синхронизационный\n\n" +
+                        "synchronisation [sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (synchronization, synchronism) EOF\n\n\n\n\n\n\n\n\n\n\n\n\n",
                 "http://cs5-1.4pda.to/2444415.png"));
     }
 
@@ -36,7 +43,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
-    public void switchToCard(int wordPos){
+    public void switchToCard(int wordPos) {
         getViewState().switchToCard(wordPos);
     }
 
