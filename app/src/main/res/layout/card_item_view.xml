@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_card_item"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#d5d6cf"
     android:layout_marginBottom="50dp"
+    android:backgroundTint="#d5d6cf"
     android:padding="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="8dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    tools:targetApi="lollipop">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_card_item"
@@ -22,6 +22,7 @@
             android:id="@+id/iv_image_word_card_item"
             android:layout_width="128dp"
             android:layout_height="128dp"
+            android:contentDescription="@string/card_view_word_image_desc"
             android:src="@drawable/ic_image_grey_48dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -47,13 +48,20 @@
             app:layout_constraintTop_toBottomOf="@id/tv_word_card_view"
             tools:text="Синхронизация" />
 
-        <TextView
-            android:id="@+id/tv_word_description_card_view"
-            android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             app:layout_constraintTop_toBottomOf="@id/tv_main_translate_card_view"
-            tools:text="[sɪŋkrənaɪˈzeɪʃn] сущ
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tv_word_description_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                tools:text="[sɪŋkrənaɪˈzeɪʃn] сущ
 синхронизацияж, синхронность ж
 (sync, synchronism)
 full synchronization – полная синхронизация
@@ -68,6 +76,7 @@ synchronization [sɪŋkrənaɪˈzeɪʃn] прил
 synchronisation [sɪŋkrənaɪˈzeɪʃn] сущ
 синхронизация ж, синхронность ж
 (synchronization, synchronism)" />
+        </ScrollView>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

@@ -10,6 +10,7 @@
     android:id="@+id/iv_word_image_list_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:contentDescription="@string/card_view_word_image_desc"
     android:src="@drawable/ic_image_grey_48dp"/>
 
     <TextView
@@ -20,7 +21,8 @@
         android:textStyle="bold"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
-        tools:text="User"/>
+        tools:text="User"
+        android:layout_marginLeft="20dp" />
 
     <TextView
         android:id="@+id/tv_word_desc_list_item"
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
-        tools:text="[ˈjuːzə] - Пользователь"/>
+        tools:text="[ˈjuːzə] - Пользователь"
+        android:layout_marginLeft="20dp" />
 
 </LinearLayout>
