@@ -1,5 +1,6 @@
 package me.geeksploit.markmyword;
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Pair;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,6 +38,7 @@ import me.geeksploit.markmyword.model.entity.prefs.MainPrefsEntity;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 import me.geeksploit.markmyword.utils.IPrefsController;
 import me.geeksploit.markmyword.utils.PrefsFactory;
+import me.geeksploit.markmyword.utils.permissions.CheckPermission;
 import me.geeksploit.markmyword.view.MainView;
 import me.geeksploit.markmyword.view.adapters.CardRvAdapter;
 import me.geeksploit.markmyword.view.adapters.ListRvAdapter;
@@ -83,6 +86,7 @@ public class MainActivity extends MvpAppCompatActivity
         initList();
         initCards();
         loadPreferences();
+        CheckPermission.externalStorage(this);
     }
 
     private void loadPreferences() {
@@ -92,6 +96,14 @@ public class MainActivity extends MvpAppCompatActivity
             checkBoxWordImageView.setChecked(mainPrefs.isImageDisplayed());
             switchImageDisplayed();
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Pair<Boolean, Boolean> result = CheckPermission.onRequestRWResult(requestCode, permissions, grantResults);
+        if (result.first) Toast.makeText(this, "Read granted", Toast.LENGTH_LONG).show();
+        if (result.second) Toast.makeText(this, "Write granted", Toast.LENGTH_SHORT).show();
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @ProvidePresenter
