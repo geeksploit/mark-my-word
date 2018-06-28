@@ -31,8 +31,8 @@ public class SwitchListener implements CompoundButton.OnCheckedChangeListener {
     }
 
     private void switchViewMode(boolean isCardList){
-        if (isCardList && cards.getVisibility() == View.GONE) return;
-        if (!isCardList && list.getVisibility() == View.GONE) return;
+        if (!isCardList && cards.getVisibility() == View.GONE) return;
+        if (isCardList && list.getVisibility() == View.GONE) return;
         list.setVisibility(isCardList ? View.GONE : View.VISIBLE);
         cards.setVisibility(isCardList ? View.VISIBLE : View.GONE);
         MainActivity activity = (MainActivity)context;
