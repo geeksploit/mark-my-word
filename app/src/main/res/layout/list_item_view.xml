@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/ll_item_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<ImageView
+    android:id="@+id/iv_word_image_list_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:contentDescription="@string/card_view_word_image_desc"
+    android:src="@drawable/ic_image_grey_48dp"/>
+
+    <TextView
+        android:id="@+id/tv_word_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        tools:text="User"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/tv_word_desc_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"
+        tools:text="[ˈjuːzə] - Пользователь"
+        android:layout_marginLeft="20dp" />
+
+</LinearLayout>
