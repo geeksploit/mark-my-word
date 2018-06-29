@@ -6,4 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(value = SingleStateStrategy.class)
 public interface ParseView extends MvpView {
+    void parseStart();
+    void parseProgress(int count);
+    void parseFinish();
 }

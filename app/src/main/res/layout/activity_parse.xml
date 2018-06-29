@@ -55,9 +55,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:textSize="36sp"
             android:textStyle="bold"
-            tools:text="War and Peace"/>
+            android:text="Here can be your book name"/>
     </LinearLayout>
 
     <ProgressBar
@@ -67,11 +68,35 @@
         app:layout_constraintTop_toBottomOf="@id/ll_summary"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/ll_summary"
-        app:layout_constraintBottom_toTopOf="@id/ll_btn_group_parse"
+        app:layout_constraintBottom_toTopOf="@id/fl_btn_group_parse"
         android:indeterminate="true"/>
-    <LinearLayout
-        android:id="@+id/ll_btn_group_parse"
+
+    <ImageView
+        android:id="@+id/iv_done_parse"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_summary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fl_btn_group_parse"
+        android:visibility="gone"
+        android:contentDescription="parse done"
+        android:src="@drawable/ic_done"/>
+    <ImageView
+        android:id="@+id/iv_cancel_parse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ll_summary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fl_btn_group_parse"
+        android:visibility="gone"
+        android:contentDescription="parse cancel"
+        android:src="@drawable/ic_cancel"/>
+
+    <FrameLayout
+        android:id="@+id/fl_btn_group_parse"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -81,14 +106,14 @@
             android:id="@+id/btn_done_parse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_gravity="center_horizontal"
             android:text="Done"/>
         <Button
             android:id="@+id/btn_cancel_parse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_horizontal"
             android:text="Cancel"/>
-    </LinearLayout>
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
