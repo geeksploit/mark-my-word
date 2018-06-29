@@ -43,6 +43,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
+    public void parseBook(){
+        getViewState().chooseBookToParse();
+    }
+
     public void switchToCard(int wordPos) {
         getViewState().switchToCard(wordPos);
     }

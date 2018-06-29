@@ -23,18 +23,22 @@ public class NavigationDrawerListener implements NavigationView.OnNavigationItem
         int id = item.getItemId();
         // TODO: 24.06.2018 presenter interaction for menu items
 
-        if (id == R.id.nav_open_book) {
-
-        } else if (id == R.id.nav_parse_book) {
-
-        } else if (id == R.id.nav_statistics) {
-
-        } else if (id == R.id.nav_settings) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (id) {
+            case R.id.nav_open_book:
+                break;
+            case R.id.nav_parse_book:
+                presenter.parseBook();
+                break;
+            case R.id.nav_statistics:
+                break;
+            case R.id.nav_settings:
+                break;
+            case R.id.nav_share:
+                break;
+            case R.id.nav_send:
+                break;
+            default:
+                throw new RuntimeException("No such menu item");
         }
 
         drawer.closeDrawer(GravityCompat.START);

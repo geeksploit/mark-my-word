@@ -8,4 +8,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 public interface MainView extends MvpView {
     void updateAdapters();
     void switchToCard(int cardPos);
+    void chooseBookToParse();
 }

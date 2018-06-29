@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import me.geeksploit.markmyword.presenter.ParsePresenter;
+import me.geeksploit.markmyword.view.IntentActions;
 import me.geeksploit.markmyword.view.ParseView;
 
 public class ParseActivity extends MvpAppCompatActivity implements ParseView{
@@ -60,8 +61,7 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
 
     private void startBookParse() {
         Intent intent = getIntent();
-
-        if (Intent.ACTION_VIEW.equals(intent.getAction())){
+        if (Intent.ACTION_VIEW.equals(intent.getAction()) || IntentActions.PARSE_BOOK.equals(intent.getAction())){
             intent.getDataString();
             Uri uri = intent.getData();
             presenter.parseBook(uri != null ? uri.getPath() : null);

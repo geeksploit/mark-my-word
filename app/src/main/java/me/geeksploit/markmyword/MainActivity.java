@@ -1,5 +1,6 @@
 package me.geeksploit.markmyword;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -38,6 +39,7 @@ import me.geeksploit.markmyword.presenter.MainPresenter;
 import me.geeksploit.markmyword.utils.IPrefsController;
 import me.geeksploit.markmyword.utils.PrefsFactory;
 import me.geeksploit.markmyword.utils.permissions.CheckPermission;
+import me.geeksploit.markmyword.view.IntentActions;
 import me.geeksploit.markmyword.view.MainView;
 import me.geeksploit.markmyword.view.adapters.CardRvAdapter;
 import me.geeksploit.markmyword.view.adapters.ListRvAdapter;
@@ -48,6 +50,7 @@ import me.geeksploit.markmyword.view.listeners.SwitchListener;
 public class MainActivity extends MvpAppCompatActivity
         implements MainView {
 
+    private static final int FILE_CHOOSER_REQUEST = 1;
     private IPrefsController prefsController;
     private MainPrefsEntity mainPrefs;
     private ListRvAdapter listAdapter;
@@ -150,20 +153,14 @@ public class MainActivity extends MvpAppCompatActivity
         navigationView.setNavigationItemSelectedListener(new NavigationDrawerListener(drawer, presenter));
     }
 
-    @OnClick({R.id.cb_image_switcher, R.id.fab})
-    public void OnClick(View view) {
-        switch (view.getId()) {
-            case R.id.cb_image_switcher:
+    @OnClick(R.id.cb_image_switcher)
+    public void OnClickSwitchMode(View view) {
                 switchImageDisplayed();
-                break;
-            case R.id.fab:
+    }
+    @OnClick(R.id.fab)
+    public void OnClickFab(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                break;
-            default:
-                Toast.makeText(this, "No such button", Toast.LENGTH_SHORT).show();
-                break;
-        }
     }
 
     private void switchImageDisplayed() {
@@ -171,6 +168,21 @@ public class MainActivity extends MvpAppCompatActivity
         mainPrefs.setImageDisplayed(isChecked);
         presenter.switchImageVisibility(isChecked);
         updateAdapters();
+    }
+
+    @Override
+    public void chooseBookToParse() {
+        Intent fileChooserIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        fileChooserIntent.setType("*/*");
+        fileChooserIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(fileChooserIntent, FILE_CHOOSER_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != FILE_CHOOSER_REQUEST || resultCode != RESULT_OK) return;
+        startActivity(new Intent(IntentActions.PARSE_BOOK, data.getData(), this, ParseActivity.class));
     }
 
     @Override
