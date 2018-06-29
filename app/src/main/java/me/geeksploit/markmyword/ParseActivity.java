@@ -31,9 +31,9 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     @BindView(R.id.iv_done_parse) ImageView ivDone;
     @BindView(R.id.iv_cancel_parse) ImageView ivCancel;
 
-    boolean isParsing;
-    boolean isDone;
-    boolean isCanceled;
+    private boolean isParsing;
+    private boolean isDone;
+    private boolean isCanceled;
     @InjectPresenter
     ParsePresenter presenter;
 
