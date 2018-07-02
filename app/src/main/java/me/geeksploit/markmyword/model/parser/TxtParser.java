@@ -2,19 +2,21 @@ package me.geeksploit.markmyword.model.parser;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
 
-//StubParser
-public class StubTxtParser implements IParser{
+//ParserFactory
+public class TxtParser implements IParser{
     private File file;
     private int count;
 
 
-    public StubTxtParser(String path) {
+    public TxtParser(String path) {
         this.file = new File(path);
     }
 
@@ -22,7 +24,7 @@ public class StubTxtParser implements IParser{
     public Observable<Integer> startParse() {
         return Observable.create( emit ->{
             Map<String, Integer> words = new HashMap<>();
-            try (BufferedReader br = new BufferedReader(new FileReader(file))){
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"))){
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
                 while (line != null){

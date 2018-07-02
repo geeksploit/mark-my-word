@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Scheduler;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import me.geeksploit.markmyword.model.parser.StubParser;
+import me.geeksploit.markmyword.model.parser.ParserFactory;
 import me.geeksploit.markmyword.view.ParseView;
 
 @InjectViewState
@@ -38,7 +38,7 @@ public class ParsePresenter extends MvpPresenter<ParseView> {
 
     public void parseBook(String path){
         getViewState().parseStart();
-        StubParser.getParser(path)
+        ParserFactory.getParser(path)
                 .startParse()
                 .subscribeOn(Schedulers.io())
                 .delay(100, TimeUnit.MILLISECONDS)
