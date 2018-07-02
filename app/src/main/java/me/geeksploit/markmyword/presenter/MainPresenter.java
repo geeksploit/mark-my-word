@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Scheduler;
-import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.model.entity.WordModel;
 import me.geeksploit.markmyword.view.MainView;
 
 @InjectViewState
@@ -20,13 +20,14 @@ public class MainPresenter extends MvpPresenter<MainView> {
         this.uiScheduler = uiScheduler;
         //stub collection
         this.wordsList = new ArrayList<>();
-        wordsList.add(new WordModel("User", "Пользователь",
+        int i = 0;
+        wordsList.add(new WordModel(i++, "User", "Пользователь",
                 "Всякое разное описание",
                 "https://www.shareicon.net/download/2016/05/29/772558_user_512x512.png"));
-        wordsList.add(new WordModel("Computer", "Компьютер",
+        wordsList.add(new WordModel(i++, "Computer", "Компьютер",
                 "Всякое разное описание",
                 "https://im0-tub-ru.yandex.net/i?id=0c06c92ffc61bdee7a4cca1ec9d8c4f0&n=13"));
-        wordsList.add(new WordModel("Synchronization", "Синхронизация",
+        wordsList.add(new WordModel(i++, "Synchronization", "Синхронизация",
                 "[sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (sync, synchronism)\n\n full synchronization – полная синхронизация" +
                         "выполнение синхронизации\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прич\n синхронизированный\n (sync)" +
                         "синхронизирующий\n (synchronizing)\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прил\n  синхронизационный\n\n" +
