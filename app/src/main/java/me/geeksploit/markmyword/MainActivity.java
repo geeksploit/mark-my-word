@@ -111,7 +111,7 @@ public class MainActivity extends MvpAppCompatActivity
     @ProvidePresenter
     MainPresenter providePresenter(){
         MainPresenter presenter = new MainPresenter(AndroidSchedulers.mainThread());
-
+        App.getInstance().getAppComponent().inject(presenter);
         return presenter;
     }
 

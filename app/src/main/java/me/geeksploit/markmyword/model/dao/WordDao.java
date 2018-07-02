@@ -3,6 +3,7 @@ package me.geeksploit.markmyword.model.dao;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -13,12 +14,12 @@ import me.geeksploit.markmyword.model.entity.WordModel;
 @Dao
 public interface WordDao {
     @Query("SELECT * FROM wordmodel")
-    Flowable<WordModel> getAll();
+    Flowable<List<WordModel>> getAll();
 
     @Query("SELECT * FROM wordmodel WHERE word = :word")
     WordModel getByWord(String word);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(WordModel word);
 
     @Update

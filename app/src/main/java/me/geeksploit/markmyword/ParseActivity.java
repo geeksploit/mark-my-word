@@ -80,7 +80,7 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     @OnClick(R.id.btn_done_parse)
     public void onClickDone(){
         finish();
-        // TODO: 29.06.2018  switch to mainActivity with new parsed book dictionary
+        startActivity(new Intent(this, MainActivity.class));
     }
 
     @OnClick(R.id.btn_cancel_parse)

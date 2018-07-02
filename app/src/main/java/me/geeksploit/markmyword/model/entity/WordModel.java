@@ -1,13 +1,16 @@
 package me.geeksploit.markmyword.model.entity;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = {"word"}, unique = true)})
 public class WordModel {
     @PrimaryKey(autoGenerate = true)
     private long id;
+    @ColumnInfo(name = "word")
     private String word;
     private String translate;
     private String description;

@@ -3,7 +3,6 @@ package me.geeksploit.markmyword.model.parser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +10,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import me.geeksploit.markmyword.App;
 import me.geeksploit.markmyword.model.entity.WordModel;
 import me.geeksploit.markmyword.model.repository.WordsRepository;
 
-//ParserFactory
 public class TxtParser implements IParser{
     private File file;
     private int count;
@@ -49,11 +46,11 @@ public class TxtParser implements IParser{
                         words.put(wm, words.get(wm) + 1);
                     } else {
                         words.put(wm, 1);
+                        repository.insertWord(wm);
                     }
                     count++;
                     emit.onNext(count);
                 }
-                repository.insertAllWords(words);
                 emit.onComplete();
             }
         });

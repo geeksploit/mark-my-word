@@ -6,7 +6,7 @@ import android.arch.persistence.room.RoomDatabase;
 import me.geeksploit.markmyword.model.dao.WordDao;
 import me.geeksploit.markmyword.model.entity.WordModel;
 
-@Database(entities = {WordModel.class}, version = 1)
+@Database(entities = {WordModel.class}, version = 1, exportSchema = false)
 public abstract class WordsDb extends RoomDatabase {
     public abstract WordDao wordDao();
 }
