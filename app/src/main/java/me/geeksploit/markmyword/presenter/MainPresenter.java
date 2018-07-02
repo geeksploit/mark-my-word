@@ -21,13 +21,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
         //stub collection
         this.wordsList = new ArrayList<>();
         int i = 0;
-        wordsList.add(new WordModel(i++, "User", "Пользователь",
+        wordsList.add(new WordModel("User", "Пользователь",
                 "Всякое разное описание",
                 "https://www.shareicon.net/download/2016/05/29/772558_user_512x512.png"));
-        wordsList.add(new WordModel(i++, "Computer", "Компьютер",
+        wordsList.add(new WordModel("Computer", "Компьютер",
                 "Всякое разное описание",
                 "https://im0-tub-ru.yandex.net/i?id=0c06c92ffc61bdee7a4cca1ec9d8c4f0&n=13"));
-        wordsList.add(new WordModel(i++, "Synchronization", "Синхронизация",
+        wordsList.add(new WordModel("Synchronization", "Синхронизация",
                 "[sɪŋkrənaɪˈzeɪʃn] сущ\n синхронизация ж, синхронность ж\n (sync, synchronism)\n\n full synchronization – полная синхронизация" +
                         "выполнение синхронизации\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прич\n синхронизированный\n (sync)" +
                         "синхронизирующий\n (synchronizing)\n\n synchronization [sɪŋkrənaɪˈzeɪʃn] прил\n  синхронизационный\n\n" +

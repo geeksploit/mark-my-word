@@ -8,11 +8,12 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import me.geeksploit.markmyword.model.entity.WordModel;
 @Dao
 public interface WordDao {
     @Query("SELECT * FROM wordmodel")
-    List<WordModel> getAll();
+    Flowable<WordModel> getAll();
 
     @Query("SELECT * FROM wordmodel WHERE word = :word")
     WordModel getByWord(String word);

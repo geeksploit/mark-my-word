@@ -6,23 +6,22 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class WordModel {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private String word;
     private String translate;
     private String description;
     private String imgUri;
 
-    public WordModel(long id, String word, String translate) {
-        this.id = id;
+    public WordModel(String word, String translate) {
         this.word = word;
         this.translate = translate;
         this.description = "";
     }
 
     @Ignore //temp ignore, need only one constructor for room
-    public WordModel(long id, String word, String translate, String description, String imgUri) {
-        this(id, word, translate);
+    public WordModel(String word, String translate, String description, String imgUri) {
+        this(word, translate);
         this.description = description;
         this.imgUri = imgUri;
 }
@@ -66,4 +65,21 @@ public class WordModel {
     public String getImgUri() {
         return imgUri;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WordModel)) return false;
+
+        WordModel wordModel = (WordModel) o;
+
+        return getWord().equals(wordModel.getWord());
+    }
+
+    @Override
+    public int hashCode() {
+        return getWord().hashCode();
+    }
 }
+
+
