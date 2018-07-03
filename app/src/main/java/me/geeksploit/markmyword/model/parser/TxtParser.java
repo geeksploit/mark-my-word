@@ -41,19 +41,21 @@ public class TxtParser implements IParser{
                 }
 
                 String allText = sb.toString();
-                String[] wordsArr = allText.split("\\s*(\\s|,|!|\\?|\\.)\\s*");
+                String[] wordsArr = allText.split("\\W");
                 for (String s : wordsArr) {
-                    WordModel wm = new WordModel(s,"");
-                    if (words.containsKey(wm)) {
-                        words.put(wm, words.get(wm) + 1);
-                    } else {
-                        words.put(wm, 1);
-                        repository.insertWord(wm);
+                    if (s.length() > 1) {
+                        WordModel wm = new WordModel(s, "");
+                        if (words.containsKey(wm)) {
+                            words.put(wm, words.get(wm) + 1);
+                        } else {
+                            words.put(wm, 1);
+                            repository.insertWord(wm);
+                        }
+                        count++;
+                        emit.onNext(new ParseProgress(file.getName(), count, words.size()));
                     }
-                    count++;
-                    emit.onNext(new ParseProgress(file.getName(), count, words.size()));
+                    emit.onComplete();
                 }
-                emit.onComplete();
             }
         });
     }

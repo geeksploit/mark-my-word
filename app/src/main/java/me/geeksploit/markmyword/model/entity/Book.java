@@ -1,9 +1,10 @@
 package me.geeksploit.markmyword.model.entity;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index(value = {"title", "author"}, unique = true)})
 public class Book {
     @PrimaryKey(autoGenerate = true)
     private long id;

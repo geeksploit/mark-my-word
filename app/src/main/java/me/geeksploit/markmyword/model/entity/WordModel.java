@@ -76,12 +76,12 @@ public class WordModel {
 
         WordModel wordModel = (WordModel) o;
 
-        return getWord().equals(wordModel.getWord());
+        return getWord().toLowerCase().equals(wordModel.getWord().toLowerCase());
     }
 
     @Override
     public int hashCode() {
-        return getWord().hashCode();
+        return getWord().toLowerCase().hashCode();
     }
 }
 

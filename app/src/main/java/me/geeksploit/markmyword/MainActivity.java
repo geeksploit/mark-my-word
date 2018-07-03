@@ -89,13 +89,17 @@ public class MainActivity extends MvpAppCompatActivity
         initList();
         initCards();
         loadPreferences();
+        getIntentBook();
+        CheckPermission.externalStorage(this);
+    }
+
+    private void getIntentBook() {
         Intent intent = getIntent();
         if (intent.hasExtra("book_title")) {
             bookTitle = intent.getStringExtra("book_title");
             mainPrefs.setBookTitle(bookTitle);
             presenter.refreshWords(bookTitle);
         }
-        CheckPermission.externalStorage(this);
     }
 
     private void loadPreferences() {
@@ -207,7 +211,7 @@ public class MainActivity extends MvpAppCompatActivity
     @Override
     public void switchToCard(int cardPos) {
         switchWordViewType.setChecked(true);
-        rvWordCards.smoothScrollToPosition(cardPos);
+        rvWordCards.scrollToPosition(cardPos);
     }
 
     @Override

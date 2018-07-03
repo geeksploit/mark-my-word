@@ -31,13 +31,13 @@ public class MainPresenter extends MvpPresenter<MainView> {
     }
 
     private void getWordsList(String title) {
-        wordsList.clear();
         repository.getWordsFromBook(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
                 .subscribe(new DisposableSubscriber<List<WordModel>>() {
                     @Override
                     public void onNext(List<WordModel> wordModels) {
+                        wordsList.clear();
                         wordsList.addAll(wordModels);
                         getViewState().updateAdapters();
                         request(1);

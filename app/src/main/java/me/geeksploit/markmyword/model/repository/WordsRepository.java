@@ -19,7 +19,6 @@ public class WordsRepository {
     private BookDao bookDao;
     private LibDao libDao;
     private long bookId;
-    private long wordId;
 
     public WordsRepository(WordsDb dataBase) {
         this.wordDao = dataBase.wordDao();
@@ -29,6 +28,9 @@ public class WordsRepository {
 
     public void insertNewBook(String title, String author){
         bookId = bookDao.insert(new Book(title,author));
+        if (bookId < 0) {
+            bookId = bookDao.getBookByPairKey(title, author).getId();
+        }
     }
 
     public void insertWordsMap(Map<WordModel, Integer> wordMap){
@@ -64,7 +66,7 @@ public class WordsRepository {
     }
 
     private void addWord(WordModel wordModel) {
-        wordId = wordDao.insert(wordModel);
+        long wordId = wordDao.insert(wordModel);
         if (wordId > -1) {
             libDao.insert(new Library(wordId, bookId));
         } else {

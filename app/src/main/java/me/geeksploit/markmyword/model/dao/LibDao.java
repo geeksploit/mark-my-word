@@ -3,6 +3,7 @@ package me.geeksploit.markmyword.model.dao;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
@@ -20,7 +21,7 @@ public interface LibDao {
             "JOIN book ON book.id = library.bookId WHERE book.title = :title")
     Flowable<List<WordModel>> getWordsForBookById(String title);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Library library);
 
     @Update
