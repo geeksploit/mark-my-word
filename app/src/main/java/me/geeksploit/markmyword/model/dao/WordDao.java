@@ -20,7 +20,7 @@ public interface WordDao {
     WordModel getByWord(String word);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(WordModel word);
+    long insert(WordModel word);
 
     @Update
     void update(WordModel word);

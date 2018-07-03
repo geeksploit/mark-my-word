@@ -56,6 +56,7 @@ public class MainActivity extends MvpAppCompatActivity
     private ListRvAdapter listAdapter;
     private CardRvAdapter cardAdapter;
     private SnapHelper snapHelper;
+    private String bookTitle;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.fab) FloatingActionButton fab;
@@ -81,13 +82,19 @@ public class MainActivity extends MvpAppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         App.getInstance().getAppComponent().inject(this);
-        mainPrefs = new MainPrefsEntity(true, false);
+        mainPrefs = new MainPrefsEntity(true, false, bookTitle);
         prefsController = PrefsFactory.getPrefs(this);
         initNavDrawer();
         initUi();
         initList();
         initCards();
         loadPreferences();
+        Intent intent = getIntent();
+        if (intent.hasExtra("book_title")) {
+            bookTitle = intent.getStringExtra("book_title");
+            mainPrefs.setBookTitle(bookTitle);
+            presenter.refreshWords(bookTitle);
+        }
         CheckPermission.externalStorage(this);
     }
 
@@ -97,6 +104,9 @@ public class MainActivity extends MvpAppCompatActivity
         if (mainPrefs.isImageDisplayed()) {
             checkBoxWordImageView.setChecked(mainPrefs.isImageDisplayed());
             switchImageDisplayed();
+        }
+        if (bookTitle == null && mainPrefs.getBookTitle() != null){
+            presenter.refreshWords(mainPrefs.getBookTitle());
         }
     }
 

@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import me.geeksploit.markmyword.model.entity.ParseProgress;
 import me.geeksploit.markmyword.model.entity.WordModel;
 import me.geeksploit.markmyword.model.repository.WordsRepository;
 
@@ -26,8 +27,9 @@ public class TxtParser implements IParser{
     }
 
     @Override
-    public Observable<Integer> startParse() {
+    public Observable<ParseProgress> startParse() {
         return Observable.create( emit ->{
+            repository.insertNewBook(file.getName(), file.getPath());
             Map<WordModel, Integer> words = new HashMap<>();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"))){
                 StringBuilder sb = new StringBuilder();
@@ -49,7 +51,7 @@ public class TxtParser implements IParser{
                         repository.insertWord(wm);
                     }
                     count++;
-                    emit.onNext(count);
+                    emit.onNext(new ParseProgress(file.getName(), count, words.size()));
                 }
                 emit.onComplete();
             }

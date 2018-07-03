@@ -20,6 +20,7 @@ public class MainPresenter extends MvpPresenter<MainView> {
     private Scheduler uiScheduler;
     private boolean isImageOn;
     private List<WordModel> wordsList;
+    private String bookTitle;
 
     @Inject
     WordsRepository repository;
@@ -29,15 +30,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
         this.wordsList = new ArrayList<>();
     }
 
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        getWordsList();
-    }
-
-    private void getWordsList() {
+    private void getWordsList(String title) {
         wordsList.clear();
-        repository.getAllWords()
+        repository.getWordsFromBook(title)
                 .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
                 .subscribe(new DisposableSubscriber<List<WordModel>>() {
@@ -60,9 +55,16 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 });
     }
 
-    public void refreshWords(){
-        getWordsList();
+    public void refreshWords(String title){
+        this.bookTitle = title;
+        getWordsList(title);
     }
+
+    public void refreshWords(){
+        getWordsList(bookTitle);
+    }
+
+
 
     public void switchImageVisibility(boolean isImageOn) {
         this.isImageOn = isImageOn;
