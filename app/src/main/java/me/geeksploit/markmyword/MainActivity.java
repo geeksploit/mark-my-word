@@ -37,6 +37,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import me.geeksploit.markmyword.model.entity.prefs.MainPrefsEntity;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 import me.geeksploit.markmyword.utils.IPrefsController;
+import me.geeksploit.markmyword.utils.IntentExtrasFields;
 import me.geeksploit.markmyword.utils.PrefsFactory;
 import me.geeksploit.markmyword.utils.permissions.CheckPermission;
 import me.geeksploit.markmyword.view.IntentActions;
@@ -95,8 +96,8 @@ public class MainActivity extends MvpAppCompatActivity
 
     private void getIntentBook() {
         Intent intent = getIntent();
-        if (intent.hasExtra("book_title")) {
-            bookTitle = intent.getStringExtra("book_title");
+        if (intent.hasExtra(IntentExtrasFields.BOOK_TITLE)) {
+            bookTitle = intent.getStringExtra(IntentExtrasFields.BOOK_TITLE);
             mainPrefs.setBookTitle(bookTitle);
             presenter.refreshWords(bookTitle);
         }
@@ -212,6 +213,13 @@ public class MainActivity extends MvpAppCompatActivity
     public void switchToCard(int cardPos) {
         switchWordViewType.setChecked(true);
         rvWordCards.scrollToPosition(cardPos);
+    }
+
+    @Override
+    public void openBooks() {
+        Intent openBooksIntent = new Intent(this, OpenBookActivity.class);
+        openBooksIntent.putExtra(IntentExtrasFields.BOOK_TITLE, bookTitle);
+        startActivity(openBooksIntent);
     }
 
     @Override

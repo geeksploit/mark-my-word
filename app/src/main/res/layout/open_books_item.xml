@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_open_books"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/iv_icon_open_books"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/open_books_book_icon"
+        android:src="@drawable/ic_library_book" />
+
+    <TextView
+        android:id="@+id/tv_title_open_books"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Dracula" />
+
+    <TextView
+        android:id="@+id/tv_author_open_books"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        tools:text="Bram Stocker" />
+</LinearLayout>
