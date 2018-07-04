@@ -3,10 +3,12 @@ package me.geeksploit.markmyword.model.entity.prefs;
 public class MainPrefsEntity implements PrefsMarker {
     private boolean isList;
     private boolean isImageDisplayed;
+    private String bookTitle;
 
-    public MainPrefsEntity(boolean isList, boolean isImageDisplayed) {
+    public MainPrefsEntity(boolean isList, boolean isImageDisplayed, String bookTitle) {
         this.isList = isList;
         this.isImageDisplayed = isImageDisplayed;
+        this.bookTitle = bookTitle;
     }
 
     public boolean isList() {
@@ -23,5 +25,13 @@ public class MainPrefsEntity implements PrefsMarker {
 
     public void setImageDisplayed(boolean imageDisplayed) {
         isImageDisplayed = imageDisplayed;
+    }
+
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
     }
 }

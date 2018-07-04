@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import me.geeksploit.markmyword.model.entity.ParseProgress;
 import me.geeksploit.markmyword.presenter.ParsePresenter;
 import me.geeksploit.markmyword.view.IntentActions;
 import me.geeksploit.markmyword.view.ParseView;
@@ -27,6 +28,7 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     @BindView(R.id.tv_file_name_parse) TextView tvFileName;
     @BindView(R.id.pb_progress_parse) ProgressBar progressBar;
     @BindView(R.id.tv_words_count_parse) TextView tvWordsCount;
+    @BindView(R.id.tv_unwords_count_parse) TextView tvUnWordsCount;
     @BindView(R.id.btn_done_parse) Button btnDone;
     @BindView(R.id.btn_cancel_parse) Button btnCancel;
     @BindView(R.id.iv_done_parse) ImageView ivDone;
@@ -35,6 +37,8 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     private boolean isParsing;
     private boolean isDone;
     private boolean isCanceled;
+    private String bookTitle;
+
     @InjectPresenter
     ParsePresenter presenter;
 
@@ -80,7 +84,9 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     @OnClick(R.id.btn_done_parse)
     public void onClickDone(){
         finish();
-        // TODO: 29.06.2018  switch to mainActivity with new parsed book dictionary
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("book_title", bookTitle);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_cancel_parse)
@@ -97,8 +103,13 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     }
 
     @Override
-    public void parseProgress(int count) {
-        tvWordsCount.setText(String.valueOf(count));
+    public void parseProgress(ParseProgress progress) {
+        tvWordsCount.setText(String.valueOf(progress.getWordCount()));
+    }
+
+    @Override
+    public void setUniqueWords(ParseProgress progress) {
+        tvUnWordsCount.setText(String.valueOf(progress.getUniqueWord()));
     }
 
     @Override
@@ -106,5 +117,10 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
         isDone = true;
         isParsing = false;
         setUIVisibility();
+    }
+
+    @Override
+    public void setBookTitle(ParseProgress progress) {
+        this.bookTitle = progress.getBookTitle();
     }
 }

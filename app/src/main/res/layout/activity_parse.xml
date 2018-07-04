@@ -50,6 +50,25 @@
                 tools:text="1543"
                 />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_unwords_label_parse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:text="Unique words:"/>
+
+            <TextView
+                android:id="@+id/tv_unwords_count_parse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="1543"
+                />
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_book_title_parse"
             android:layout_width="wrap_content"

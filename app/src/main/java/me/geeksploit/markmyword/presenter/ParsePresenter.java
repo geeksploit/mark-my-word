@@ -8,20 +8,23 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Scheduler;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import me.geeksploit.markmyword.model.entity.ParseProgress;
 import me.geeksploit.markmyword.model.parser.ParserFactory;
 import me.geeksploit.markmyword.view.ParseView;
 
 @InjectViewState
 public class ParsePresenter extends MvpPresenter<ParseView> {
     private Scheduler uiScheduler;
-    private DisposableObserver<Integer> disposableObserver;
+    private DisposableObserver<ParseProgress> disposableObserver;
 
     public ParsePresenter(Scheduler uiScheduler) {
         this.uiScheduler = uiScheduler;
-        disposableObserver = new DisposableObserver<Integer>() {
+        disposableObserver = new DisposableObserver<ParseProgress>() {
             @Override
-            public void onNext(Integer integer) {
-                getViewState().parseProgress(integer);
+            public void onNext(ParseProgress parseProgress) {
+                getViewState().setBookTitle(parseProgress);
+                getViewState().parseProgress(parseProgress);
+                getViewState().setUniqueWords(parseProgress);
             }
 
             @Override
@@ -41,7 +44,7 @@ public class ParsePresenter extends MvpPresenter<ParseView> {
         ParserFactory.getParser(path)
                 .startParse()
                 .subscribeOn(Schedulers.io())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(10, TimeUnit.MILLISECONDS)
                 .observeOn(uiScheduler)
                 .subscribe(disposableObserver);
     }

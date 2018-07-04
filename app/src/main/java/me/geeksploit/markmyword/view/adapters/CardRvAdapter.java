@@ -13,7 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.geeksploit.markmyword.R;
-import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.model.entity.WordModel;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 
 public class CardRvAdapter extends WordRvAdapter {

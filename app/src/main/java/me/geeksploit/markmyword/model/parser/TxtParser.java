@@ -3,17 +3,23 @@ package me.geeksploit.markmyword.model.parser;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.reactivex.Observable;
+import javax.inject.Inject;
 
-//ParserFactory
+import io.reactivex.Observable;
+import me.geeksploit.markmyword.model.entity.ParseProgress;
+import me.geeksploit.markmyword.model.entity.WordModel;
+import me.geeksploit.markmyword.model.repository.WordsRepository;
+
 public class TxtParser implements IParser{
     private File file;
     private int count;
+
+    @Inject
+    WordsRepository repository;
 
 
     public TxtParser(String path) {
@@ -21,9 +27,10 @@ public class TxtParser implements IParser{
     }
 
     @Override
-    public Observable<Integer> startParse() {
+    public Observable<ParseProgress> startParse() {
         return Observable.create( emit ->{
-            Map<String, Integer> words = new HashMap<>();
+            repository.insertNewBook(file.getName(), file.getPath());
+            Map<WordModel, Integer> words = new HashMap<>();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"))){
                 StringBuilder sb = new StringBuilder();
                 String line = br.readLine();
@@ -34,17 +41,21 @@ public class TxtParser implements IParser{
                 }
 
                 String allText = sb.toString();
-                String[] wordsArr = allText.split("\\s*(\\s|,|!|\\?|\\.)\\s*");
+                String[] wordsArr = allText.split("\\W");
                 for (String s : wordsArr) {
-                    if (words.containsKey(s)) {
-                        words.put(s, words.get(s) + 1);
-                    } else {
-                        words.put(s, 1);
+                    if (s.length() > 1) {
+                        WordModel wm = new WordModel(s, "");
+                        if (words.containsKey(wm)) {
+                            words.put(wm, words.get(wm) + 1);
+                        } else {
+                            words.put(wm, 1);
+                            repository.insertWord(wm);
+                        }
+                        count++;
+                        emit.onNext(new ParseProgress(file.getName(), count, words.size()));
                     }
-                    count++;
-                    emit.onNext(count);
+                    emit.onComplete();
                 }
-                emit.onComplete();
             }
         });
     }

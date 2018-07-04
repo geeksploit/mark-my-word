@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 import javax.inject.Inject;
-import me.geeksploit.markmyword.model.WordModel;
+import me.geeksploit.markmyword.model.entity.WordModel;
 import me.geeksploit.markmyword.model.image.IImageLoader;
 import me.geeksploit.markmyword.presenter.MainPresenter;
 

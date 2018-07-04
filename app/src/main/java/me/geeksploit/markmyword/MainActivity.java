@@ -56,6 +56,7 @@ public class MainActivity extends MvpAppCompatActivity
     private ListRvAdapter listAdapter;
     private CardRvAdapter cardAdapter;
     private SnapHelper snapHelper;
+    private String bookTitle;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.fab) FloatingActionButton fab;
@@ -81,14 +82,24 @@ public class MainActivity extends MvpAppCompatActivity
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         App.getInstance().getAppComponent().inject(this);
-        mainPrefs = new MainPrefsEntity(true, false);
+        mainPrefs = new MainPrefsEntity(true, false, bookTitle);
         prefsController = PrefsFactory.getPrefs(this);
         initNavDrawer();
         initUi();
         initList();
         initCards();
         loadPreferences();
+        getIntentBook();
         CheckPermission.externalStorage(this);
+    }
+
+    private void getIntentBook() {
+        Intent intent = getIntent();
+        if (intent.hasExtra("book_title")) {
+            bookTitle = intent.getStringExtra("book_title");
+            mainPrefs.setBookTitle(bookTitle);
+            presenter.refreshWords(bookTitle);
+        }
     }
 
     private void loadPreferences() {
@@ -97,6 +108,9 @@ public class MainActivity extends MvpAppCompatActivity
         if (mainPrefs.isImageDisplayed()) {
             checkBoxWordImageView.setChecked(mainPrefs.isImageDisplayed());
             switchImageDisplayed();
+        }
+        if (bookTitle == null && mainPrefs.getBookTitle() != null){
+            presenter.refreshWords(mainPrefs.getBookTitle());
         }
     }
 
@@ -111,7 +125,7 @@ public class MainActivity extends MvpAppCompatActivity
     @ProvidePresenter
     MainPresenter providePresenter(){
         MainPresenter presenter = new MainPresenter(AndroidSchedulers.mainThread());
-
+        App.getInstance().getAppComponent().inject(presenter);
         return presenter;
     }
 
@@ -197,7 +211,7 @@ public class MainActivity extends MvpAppCompatActivity
     @Override
     public void switchToCard(int cardPos) {
         switchWordViewType.setChecked(true);
-        rvWordCards.smoothScrollToPosition(cardPos);
+        rvWordCards.scrollToPosition(cardPos);
     }
 
     @Override
