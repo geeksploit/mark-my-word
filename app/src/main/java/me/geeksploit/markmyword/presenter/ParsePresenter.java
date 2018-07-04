@@ -3,8 +3,6 @@ package me.geeksploit.markmyword.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Scheduler;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -44,7 +42,6 @@ public class ParsePresenter extends MvpPresenter<ParseView> {
         ParserFactory.getParser(path)
                 .startParse()
                 .subscribeOn(Schedulers.io())
-                .delay(10, TimeUnit.MILLISECONDS)
                 .observeOn(uiScheduler)
                 .subscribe(disposableObserver);
     }

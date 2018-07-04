@@ -110,8 +110,9 @@ public class MainActivity extends MvpAppCompatActivity
             checkBoxWordImageView.setChecked(mainPrefs.isImageDisplayed());
             switchImageDisplayed();
         }
-        if (bookTitle == null && mainPrefs.getBookTitle() != null){
-            presenter.refreshWords(mainPrefs.getBookTitle());
+        if (mainPrefs.getBookTitle() != null){
+            bookTitle = mainPrefs.getBookTitle();
+            presenter.refreshWords(bookTitle);
         }
     }
 

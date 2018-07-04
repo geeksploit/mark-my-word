@@ -54,8 +54,8 @@ public class TxtParser implements IParser{
                         count++;
                         emit.onNext(new ParseProgress(file.getName(), count, words.size()));
                     }
-                    emit.onComplete();
                 }
+                emit.onComplete();
             }
         });
     }
