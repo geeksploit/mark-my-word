@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Flowable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import me.geeksploit.markmyword.model.dao.BookDao;
 import me.geeksploit.markmyword.model.dao.LibDao;
 import me.geeksploit.markmyword.model.dao.WordDao;
