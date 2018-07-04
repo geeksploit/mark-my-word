@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import me.geeksploit.markmyword.model.entity.ParseProgress;
 import me.geeksploit.markmyword.presenter.ParsePresenter;
+import me.geeksploit.markmyword.utils.IntentExtrasFields;
 import me.geeksploit.markmyword.view.IntentActions;
 import me.geeksploit.markmyword.view.ParseView;
 
@@ -85,7 +86,7 @@ public class ParseActivity extends MvpAppCompatActivity implements ParseView{
     public void onClickDone(){
         finish();
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("book_title", bookTitle);
+        intent.putExtra(IntentExtrasFields.BOOK_TITLE, bookTitle);
         startActivity(intent);
     }
 

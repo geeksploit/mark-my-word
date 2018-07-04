@@ -5,9 +5,7 @@ import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(value = SingleStateStrategy.class)
-public interface MainView extends MvpView {
-    void updateAdapters();
-    void switchToCard(int cardPos);
-    void chooseBookToParse();
-    void openBooks();
+public interface OpenBooksView extends MvpView {
+    void update();
+    void chooseBook(String title);
 }

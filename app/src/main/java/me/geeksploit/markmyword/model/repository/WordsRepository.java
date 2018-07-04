@@ -26,6 +26,10 @@ public class WordsRepository {
         this.libDao = dataBase.libDao();
     }
 
+    public Flowable<List<Book>> getBooks(){
+        return bookDao.getAllBooks();
+    }
+
     public void insertNewBook(String title, String author){
         bookId = bookDao.insert(new Book(title,author));
         if (bookId < 0) {

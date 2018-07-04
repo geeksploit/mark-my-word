@@ -21,13 +21,14 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ParseActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="text/*" />
@@ -36,6 +37,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="text/*" />
@@ -43,6 +45,7 @@
                 <data android:scheme="content" />
             </intent-filter>
         </activity>
+        <activity android:name=".OpenBookActivity"></activity>
     </application>
 
 </manifest>

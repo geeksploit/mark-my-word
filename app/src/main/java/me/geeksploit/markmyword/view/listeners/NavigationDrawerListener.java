@@ -25,6 +25,7 @@ public class NavigationDrawerListener implements NavigationView.OnNavigationItem
 
         switch (id) {
             case R.id.nav_open_book:
+                presenter.openBooks();
                 break;
             case R.id.nav_parse_book:
                 presenter.parseBook();

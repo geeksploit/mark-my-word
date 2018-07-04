@@ -10,6 +10,7 @@ import me.geeksploit.markmyword.di.modules.RoomModule;
 import me.geeksploit.markmyword.di.modules.WordRepoModule;
 import me.geeksploit.markmyword.model.parser.TxtParser;
 import me.geeksploit.markmyword.presenter.MainPresenter;
+import me.geeksploit.markmyword.presenter.OpenBooksPresenter;
 import me.geeksploit.markmyword.presenter.ParsePresenter;
 import me.geeksploit.markmyword.view.adapters.WordRvAdapter;
 
@@ -19,5 +20,6 @@ public interface AppComponent {
     void inject(MainActivity mainActivity);
     void inject(MainPresenter presenter);
     void inject(TxtParser parser);
+    void inject(OpenBooksPresenter parser);
     void inject(WordRvAdapter adapter);
 }

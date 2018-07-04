@@ -71,6 +71,10 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
+    public void openBooks(){
+        getViewState().openBooks();
+    }
+
     public void parseBook(){
         getViewState().chooseBookToParse();
     }
