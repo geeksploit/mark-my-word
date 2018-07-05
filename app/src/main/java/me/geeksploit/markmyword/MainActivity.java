@@ -211,6 +211,15 @@ public class MainActivity extends MvpAppCompatActivity
     }
 
     @Override
+    public void updateItem(int pos){
+        if (mainPrefs.isList()) {
+            listAdapter.notifyItemChanged(pos);
+        } else {
+            cardAdapter.notifyItemChanged(pos);
+        }
+    }
+
+    @Override
     public void switchToCard(int cardPos) {
         switchWordViewType.setChecked(true);
         rvWordCards.scrollToPosition(cardPos);

@@ -10,4 +10,5 @@ public interface MainView extends MvpView {
     void switchToCard(int cardPos);
     void chooseBookToParse();
     void openBooks();
+    void updateItem(int pos);
 }

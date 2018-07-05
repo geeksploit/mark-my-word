@@ -34,6 +34,7 @@ public class CardRvAdapter extends WordRvAdapter {
         CardItemView cardItem = (CardItemView) holder;
         WordModel word = words.get(position);
         cardItem.tvWord.setText(word.getWord());
+        getTranslation(word, position);
         cardItem.tvWordTranslate.setText(word.getTranslate());
         cardItem.tvWordDescription.setText(word.getDescription());
         if (presenter.isImageOn()) {
