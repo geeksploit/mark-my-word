@@ -23,6 +23,12 @@ public abstract class WordRvAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         words = presenter.getWords();
     }
 
+    protected void getTranslation(WordModel word, int position){
+        if (word.getTranslate().equals("") || word.getTranslate() == null){
+            presenter.translateWord(word, position);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return words.size();

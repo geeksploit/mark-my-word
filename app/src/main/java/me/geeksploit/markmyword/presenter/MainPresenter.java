@@ -55,15 +55,41 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 });
     }
 
-    public void refreshWords(String title){
+    public void translateWord(WordModel wordModel, int pos) {
+        repository.translateAndAdd(wordModel);
+        repository.getWord(wordModel)
+                .subscribeOn(Schedulers.io())
+                .observeOn(uiScheduler)
+                .subscribe(new DisposableSubscriber<WordModel>() {
+                    @Override
+                    public void onNext(WordModel translatedWord) {
+                        wordsList.remove(pos);
+                        wordsList.add(pos, translatedWord);
+                        // TODO: 05.07.2018 решить проблему обновления адаптера 
+                        getViewState().updateItem(pos);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        throw new RuntimeException(t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+    public void refreshWords(String title) {
         this.bookTitle = title;
         getWordsList(title);
     }
 
-    public void refreshWords(){
+    public void refreshWords() {
         getWordsList(bookTitle);
     }
-
 
 
     public void switchImageVisibility(boolean isImageOn) {
@@ -71,11 +97,11 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
-    public void openBooks(){
+    public void openBooks() {
         getViewState().openBooks();
     }
 
-    public void parseBook(){
+    public void parseBook() {
         getViewState().chooseBookToParse();
     }
 

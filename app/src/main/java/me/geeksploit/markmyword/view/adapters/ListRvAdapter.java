@@ -34,6 +34,7 @@ public class ListRvAdapter extends WordRvAdapter {
         ListItemView listItem = (ListItemView) holder;
         WordModel word = words.get(position);
         listItem.tvWord.setText(word.getWord());
+        getTranslation(word, position);
         listItem.tvWordTranslate.setText(word.getTranslate());
         if (presenter.isImageOn()) {
             imageLoader.loadInto(word.getImgUri(), listItem.ivItemImage);
