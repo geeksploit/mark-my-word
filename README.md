@@ -29,3 +29,6 @@
 4. ORM для работы с БД `Room persistece`;</br>
 5. Работа с изображениями `Glide`;</br>
 6. Внедрение зависимостей реализовано с помощью `Dagger2`;</br>
+
+### Архитектура БД:<br>
+[image]mark-my-word/scheme_db.jpg[/image]
