@@ -19,7 +19,7 @@
 [ ] 7. Поиск по по словарю.</br>
 [ ] 8. Сортировка слов в словаре.</br>
 [ ] 9. Загрузка изображений соответствующих словам для закрепления выученых слов с помощью зрительной памяти.</br>
-<img src="https://github.com/geeksploit/mark-my-word/blob/master/list_view.png">List view</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/list_view.png" width=108px height=192px>List view</img>
 <img src="https://github.com/geeksploit/mark-my-word/blob/master/card_view.png">Card view</img>
 
 ## Архитектура и технологии.
