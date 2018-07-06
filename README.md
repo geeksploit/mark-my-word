@@ -31,4 +31,4 @@
 6. Внедрение зависимостей реализовано с помощью `Dagger2`;</br>
 
 ### Архитектура БД:<br>
-[image]mark-my-word/scheme_db.jpg[/image]
+<image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">mark-my-word/scheme_db.jpg</image>
