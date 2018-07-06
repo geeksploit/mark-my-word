@@ -44,14 +44,14 @@
 <image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">Архитектура БД</image>
 
 ## Комманда проекта:</br>
-### Максим Ремыга  https://github.com/geeksploit </br></br>
+### [Максим Ремыга](https://github.com/geeksploit) </br></br>
 #### - Идея;</br>
 #### - Архитектура БД;</br></br>
-### Артем Шумилов  https://github.com/SupNacho </br>
-#### - Прототипирование https://xd.adobe.com/view/c088cdd4-d0fd-4618-5b4e-459997207a44-b6b9/ ;</br>
+### [Артем Шумилов](https://github.com/SupNacho)</br>
+#### - [Прототипирование](https://xd.adobe.com/view/c088cdd4-d0fd-4618-5b4e-459997207a44-b6b9/);</br>
 #### - Архитектура приложения;</br>
 #### - Выбор технологий;</br>
 #### - Написание кода;</br></br>
-### Ильяс Султанов  https://github.com/qervot </br>
+### [Ильяс Султанов](https://github.com/qervot) </br>
 #### - Разработка парсера книг в формате `pdf`;</br>
 
