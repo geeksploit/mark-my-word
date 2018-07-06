@@ -7,9 +7,9 @@
 
 ## Функционал [x] <- реализовано, [ ] <- в процессе реализации
 [x] 1. Считывание книг следующих форматов:</br>
-&nbsp[x] `txt` - plain text UTF-8</br>
-&nbsp[ ] `pdf` - Portable Document Format (not bitmap)</br>
-&nbsp[ ] `fb2` - Fiction Book / Feed book</br>
+[x] `txt` - plain text UTF-8;</br>
+[ ] `pdf` - Portable Document Format (not bitmap);</br>
+[ ] `fb2` - Fiction Book / Feed book;</br>
 </br>
 [x] 2. Разбирать книгу на уникальные слова (отсеивать повторения).</br>
 [x] 3. Сохранять полученные данные в БД, формируя словари под каждую обработтаную книгу.</br>
