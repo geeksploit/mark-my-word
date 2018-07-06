@@ -7,7 +7,7 @@
 
 ## Функционал [x] <- реализовано, [ ] <- в процессе реализации
 [x] 1. Считывание книг следующих форматов:</br>
-%20[x] `txt` - plain text UTF-8</br>
+<&nbsp>[x] `txt` - plain text UTF-8</br>
  [ ] `pdf` - Portable Document Format (not bitmap)</br>
  [ ] `fb2` - Fiction Book / Feed book</br>
 </br>
