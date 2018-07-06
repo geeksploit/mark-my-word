@@ -20,7 +20,13 @@
 [ ] 8. Сортировка слов в словаре.</br>
 [ ] 9. Загрузка изображений соответствующих словам для закрепления выученых слов с помощью зрительной памяти.</br>
 <img src="https://github.com/geeksploit/mark-my-word/blob/master/list_view.png" width=108px height=192px>List view</img>
-<img src="https://github.com/geeksploit/mark-my-word/blob/master/card_view.png">Card view</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/card_view.png"  width=108px height=192px>Card view</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/card_view_image.png" width=108px height=192px>Card view with image</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/parse_in_progress.png"  width=108px height=192px>Parse in progress</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/parse_cancel.png"  width=108px height=192px>Cancel parsing</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/parse_complete.png" width=108px height=192px>Parse complete</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/navigation.png"  width=108px height=192px>Navigation</img>
+<img src="https://github.com/geeksploit/mark-my-word/blob/master/select_from_lib.png"  width=108px height=192px>Select from lib</img>
 
 ## Архитектура и технологии.
 Проект реализован на архитектуре `MVP` на языке `Java` с применением следующих технологий:</br>
