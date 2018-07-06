@@ -35,4 +35,13 @@
 ### Архитектура БД:<br>
 <image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">Архитектура БД</image>
 
+## Комманда проекта:</br>
+### Максим Ремыга <ahref="https://github.com/geeksploit">Profile</ahref></br>
+#### Идея;</br>
+#### Архитектура БД;</br>
+### Артем Шумилов <ahref="https://github.com/SupNacho">Profile</ahref></br>
+#### Прототипирование <ahref="https://xd.adobe.com/view/c088cdd4-d0fd-4618-5b4e-459997207a44-b6b9/">prototype</ahref>;</br>
+#### Архитектура приложения;</br>
+#### Выбор технологий;</br>
+#### Написание кода;</br>
 
