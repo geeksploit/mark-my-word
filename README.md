@@ -29,6 +29,10 @@
 4. ORM для работы с БД `Room persistece`;</br>
 5. Работа с изображениями `Glide`;</br>
 6. Внедрение зависимостей реализовано с помощью `Dagger2`;</br>
+7. Работа с JSON с использованием `Gson`;
+8. Сохранение настроек в `SharedPreferences` реализованос применением JSON;
 
 ### Архитектура БД:<br>
-<image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">mark-my-word/scheme_db.jpg</image>
+<image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">Архитектура БД</image>
+
+
