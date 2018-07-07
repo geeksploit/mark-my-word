@@ -43,7 +43,7 @@
 ### Архитектура БД:<br>
 <image src="https://github.com/geeksploit/mark-my-word/blob/master/scheme_db.jpg?raw=true">Архитектура БД</image>
 
-## Комманда проекта:</br>
+## Команда проекта:</br>
 ### [Максим Ремыга](https://github.com/geeksploit) </br></br>
 #### - Идея;</br>
 #### - Архитектура БД;</br></br>
