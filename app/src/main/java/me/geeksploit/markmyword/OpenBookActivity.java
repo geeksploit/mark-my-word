@@ -65,6 +65,7 @@ public class OpenBookActivity extends MvpAppCompatActivity implements OpenBooksV
     public void chooseBook(String title) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(IntentExtrasFields.BOOK_TITLE, title);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
     }

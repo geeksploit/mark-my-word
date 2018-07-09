@@ -4,7 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import me.geeksploit.markmyword.model.api.YandexApiConst;
+import me.geeksploit.markmyword.model.api.ApiConst;
 import me.geeksploit.markmyword.model.api.YandexApiService;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -21,7 +21,7 @@ public class ApiModule {
     @Provides
     Retrofit retrofit(GsonConverterFactory gson){
         return new Retrofit.Builder()
-                .baseUrl(YandexApiConst.YANDEX_URL)
+                .baseUrl(ApiConst.YANDEX_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gson)
                 .build();

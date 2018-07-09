@@ -1,10 +1,13 @@
 package me.geeksploit.markmyword.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -33,6 +36,8 @@ public class MainPresenter extends MvpPresenter<MainView> {
     private void getWordsList(String title) {
         repository.getWordsFromBook(title)
                 .subscribeOn(Schedulers.io())
+                .debounce(1000, TimeUnit.MILLISECONDS)
+                .onBackpressureDrop()
                 .observeOn(uiScheduler)
                 .subscribe(new DisposableSubscriber<List<WordModel>>() {
                     @Override
@@ -40,7 +45,6 @@ public class MainPresenter extends MvpPresenter<MainView> {
                         wordsList.clear();
                         wordsList.addAll(wordModels);
                         getViewState().updateAdapters();
-                        request(1);
                     }
 
                     @Override
@@ -50,23 +54,22 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
                     @Override
                     public void onComplete() {
-                        getViewState().updateAdapters();
+
                     }
                 });
     }
 
     public void translateWord(WordModel wordModel, int pos) {
-        repository.translateAndAdd(wordModel);
+        repository.translateAndUpdate(wordModel);
         repository.getWord(wordModel)
                 .subscribeOn(Schedulers.io())
+                .debounce(500, TimeUnit.MILLISECONDS)
                 .observeOn(uiScheduler)
                 .subscribe(new DisposableSubscriber<WordModel>() {
                     @Override
                     public void onNext(WordModel translatedWord) {
                         wordsList.remove(pos);
                         wordsList.add(pos, translatedWord);
-                        // TODO: 05.07.2018 решить проблему обновления адаптера 
-                        getViewState().updateItem(pos);
                     }
 
                     @Override
