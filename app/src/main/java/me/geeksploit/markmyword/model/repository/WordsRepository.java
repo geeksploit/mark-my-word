@@ -85,8 +85,7 @@ public class WordsRepository {
         wordDao.delete(word);
     }
 
-    // TODO: 05.07.2018 remove translate from saving
-    public void translateAndAdd(WordModel wordModel) {
+    public void translateAndUpdate(WordModel wordModel) {
         apiService.getTraslation(wordModel.getWord())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new DisposableObserver<Translation>() {

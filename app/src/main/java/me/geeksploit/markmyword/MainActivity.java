@@ -183,7 +183,6 @@ public class MainActivity extends MvpAppCompatActivity
         boolean isChecked = checkBoxWordImageView.isChecked();
         mainPrefs.setImageDisplayed(isChecked);
         presenter.switchImageVisibility(isChecked);
-        updateAdapters();
     }
 
     @Override
@@ -207,15 +206,6 @@ public class MainActivity extends MvpAppCompatActivity
             listAdapter.notifyDataSetChanged();
         } else {
             cardAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void updateItem(int pos){
-        if (mainPrefs.isList()) {
-            listAdapter.notifyItemChanged(pos);
-        } else {
-            cardAdapter.notifyItemChanged(pos);
         }
     }
 
