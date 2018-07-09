@@ -183,7 +183,6 @@ public class MainActivity extends MvpAppCompatActivity
         boolean isChecked = checkBoxWordImageView.isChecked();
         mainPrefs.setImageDisplayed(isChecked);
         presenter.switchImageVisibility(isChecked);
-        updateAdapters();
     }
 
     @Override

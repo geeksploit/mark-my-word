@@ -19,11 +19,14 @@ public interface WordDao {
     @Query("SELECT * FROM wordmodel WHERE word = :word")
     WordModel getByWord(String word);
 
+    @Query("SELECT * FROM wordmodel WHERE id = :id")
+    Flowable<WordModel> getWord(long id);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(WordModel word);
 
-    @Update
-    void update(WordModel word);
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    int update(WordModel word);
 
     @Delete
     void delete(WordModel word);

@@ -4,14 +4,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import me.geeksploit.markmyword.model.api.YandexApiService;
 import me.geeksploit.markmyword.model.db.WordsDb;
 import me.geeksploit.markmyword.model.repository.WordsRepository;
 
 @Singleton
-@Module(includes = RoomModule.class)
+@Module(includes = {RoomModule.class, ApiModule.class})
 public class WordRepoModule {
     @Provides
-    WordsRepository wordsRepository(WordsDb dataBase){
-        return new WordsRepository(dataBase);
+    WordsRepository wordsRepository(WordsDb dataBase, YandexApiService apiService){
+        return new WordsRepository(dataBase, apiService);
     }
 }

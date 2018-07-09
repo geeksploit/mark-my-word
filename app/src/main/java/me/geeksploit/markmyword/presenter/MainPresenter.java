@@ -1,10 +1,13 @@
 package me.geeksploit.markmyword.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -33,6 +36,8 @@ public class MainPresenter extends MvpPresenter<MainView> {
     private void getWordsList(String title) {
         repository.getWordsFromBook(title)
                 .subscribeOn(Schedulers.io())
+                .debounce(1000, TimeUnit.MILLISECONDS)
+                .onBackpressureDrop()
                 .observeOn(uiScheduler)
                 .subscribe(new DisposableSubscriber<List<WordModel>>() {
                     @Override
@@ -40,7 +45,6 @@ public class MainPresenter extends MvpPresenter<MainView> {
                         wordsList.clear();
                         wordsList.addAll(wordModels);
                         getViewState().updateAdapters();
-                        request(1);
                     }
 
                     @Override
@@ -50,20 +54,45 @@ public class MainPresenter extends MvpPresenter<MainView> {
 
                     @Override
                     public void onComplete() {
-                        getViewState().updateAdapters();
+
                     }
                 });
     }
 
-    public void refreshWords(String title){
+    public void translateWord(WordModel wordModel, int pos) {
+        repository.translateAndUpdate(wordModel);
+        repository.getWord(wordModel)
+                .subscribeOn(Schedulers.io())
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .observeOn(uiScheduler)
+                .subscribe(new DisposableSubscriber<WordModel>() {
+                    @Override
+                    public void onNext(WordModel translatedWord) {
+                        wordsList.remove(pos);
+                        wordsList.add(pos, translatedWord);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        throw new RuntimeException(t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+    }
+
+    public void refreshWords(String title) {
         this.bookTitle = title;
         getWordsList(title);
     }
 
-    public void refreshWords(){
+    public void refreshWords() {
         getWordsList(bookTitle);
     }
-
 
 
     public void switchImageVisibility(boolean isImageOn) {
@@ -71,11 +100,11 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().updateAdapters();
     }
 
-    public void openBooks(){
+    public void openBooks() {
         getViewState().openBooks();
     }
 
-    public void parseBook(){
+    public void parseBook() {
         getViewState().chooseBookToParse();
     }
 
